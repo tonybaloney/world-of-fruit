@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Amazing World of Fruit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }        header {
+            background-color: #ffcc00;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .banana-bread {
+            background-color: #d2691e !important;
+            background-image: 
+                radial-gradient(circle at 10% 20%, #8b4513 1px, transparent 1px),
+                radial-gradient(circle at 25% 35%, #654321 1px, transparent 1px),
+                radial-gradient(circle at 45% 15%, #8b4513 1px, transparent 1px),
+                radial-gradient(circle at 65% 40%, #654321 1px, transparent 1px),
+                radial-gradient(circle at 80% 25%, #8b4513 1px, transparent 1px),
+                radial-gradient(circle at 15% 60%, #654321 1px, transparent 1px),
+                radial-gradient(circle at 35% 75%, #8b4513 1px, transparent 1px),
+                radial-gradient(circle at 55% 65%, #654321 1px, transparent 1px),
+                radial-gradient(circle at 75% 80%, #8b4513 1px, transparent 1px),
+                radial-gradient(circle at 90% 50%, #654321 1px, transparent 1px) !important;
+            background-size: 100px 50px !important;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #ff6600;
+        }        .fruit-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .fruit-emoji {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #ff6600;
+        }
+        .fruit-emoji:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .fruit-emoji span {
+            font-size: 4em;
+            margin-bottom: 5px;
+        }
+        .fruit-emoji p {
+            margin: 0;
+            font-weight: bold;
+            color: #ff6600;
+            font-size: 1.1em;
+        }
+        .strawberry-seeds {
+            position: relative;
+        }
+        .strawberry-seeds::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 2px 2px, #2d5016 1px, transparent 1px),
+                radial-gradient(circle at 15px 8px, #2d5016 1px, transparent 1px),
+                radial-gradient(circle at 30px 15px, #2d5016 1px, transparent 1px),
+                radial-gradient(circle at 45px 25px, #2d5016 1px, transparent 1px),
+                radial-gradient(circle at 8px 30px, #2d5016 1px, transparent 1px),
+                radial-gradient(circle at 25px 40px, #2d5016 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+        }        .cherry-center {
+            position: relative;
+        }
+        .cherry-center::before {
+            content: '🍒';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 150px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .falling-apples {
+            position: relative;
+        }
+        .falling-apples::before {
+            content: '🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎';
+            position: fixed;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            font-size: 30px;
+            animation: fall 3s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            letter-spacing: 50px;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(calc(100vh + 50px));
+            }
+        }
+        .grape-juice {
+            position: relative;
+        }
+        .grape-juice::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to top, #6a0dad 0%, #8a2be2 50%, rgba(138, 43, 226, 0.8) 80%, transparent 100%);
+            animation: fillJuice 3s ease-out forwards;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes fillJuice {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 40%;
+            }
+        }
+        .spinning-text {
+            position: relative;
+        }        .spinning-text * {
+            animation: spin 1s linear forwards;
+            transform-origin: center;
+        }        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Navigation Styles */
+        nav a:hover {
+            background-color: rgba(255,255,255,0.4) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style><script>        function showFruitInfo(fruitName) {
+            // Change background color based on fruit
+            const fruitColors = {
+                'Apple': '#ff6b6b',
+                'Banana': '#ffd93d',
+                'Cherry': '#dc143c',
+                'Grapes': '#9966cc',
+                'Orange': '#ff8c00',
+                'Strawberry': '#ff1744'
+            };
+            
+            document.body.style.backgroundColor = fruitColors[fruitName];            // Remove all special effects first
+            document.body.classList.remove('strawberry-seeds');
+            document.body.classList.remove('cherry-center');
+            document.body.classList.remove('falling-apples');
+            document.body.classList.remove('grape-juice');
+            document.body.classList.remove('spinning-text');
+            document.querySelector('header').classList.remove('banana-bread');
+            
+            // Add strawberry seeds effect for strawberry
+            if (fruitName === 'Strawberry') {
+                document.body.classList.add('strawberry-seeds');
+            }
+            
+            // Add banana bread header effect for banana
+            if (fruitName === 'Banana') {
+                document.querySelector('header').classList.add('banana-bread');
+            }
+            
+            // Add cherry center effect for cherry
+            if (fruitName === 'Cherry') {
+                document.body.classList.add('cherry-center');
+            }
+              // Add falling apples effect for apple
+            if (fruitName === 'Apple') {
+                document.body.classList.add('falling-apples');
+            }
+              // Add grape juice effect for grapes
+            if (fruitName === 'Grapes') {
+                document.body.classList.add('grape-juice');
+            }
+            
+            // Add spinning text effect for orange
+            if (fruitName === 'Orange') {
+                document.body.classList.add('spinning-text');
+            }
+            
+            // Add spinning text effect for orange
+            if (fruitName === 'Orange') {
+                const orangeText = document.createElement('div');
+                orangeText.classList.add('spinning-text');
+                orangeText.innerHTML = '🍊 Orange is a citrus fruit that is highly valued for its sweet, juicy flavor and vibrant color. It is a good source of vitamin C, potassium, and dietary fiber. Eating oranges may help boost your immune system, improve skin health, and reduce the risk of chronic diseases. Enjoy oranges fresh, juiced, or in fruit salads!';
+                document.body.appendChild(orangeText);
+                
+                setTimeout(() => {
+                    orangeText.remove();
+                }, 4000);
+            }
+            
+            alert(`Learn more about ${fruitName}!\n\n${fruitName} is delicious and packed with nutrients. Enjoy it as a snack or in your favorite recipes!`);
+        }
+    </script>
+</head>
+<body>    <header>
+        <h1>The Amazing World of Fruit</h1>
+    </header>
+    
+    <nav style="background-color: #ff6600; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <a href="about.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 10px 20px; background-color: rgba(255,255,255,0.2); border-radius: 20px; transition: all 0.3s ease; display: inline-block;">📖 About Fruits</a>
+        <a href="nutrition.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 10px 20px; background-color: rgba(255,255,255,0.2); border-radius: 20px; transition: all 0.3s ease; display: inline-block;">🥗 Nutrition Guide</a>
+        <a href="recipes.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 10px 20px; background-color: rgba(255,255,255,0.2); border-radius: 20px; transition: all 0.3s ease; display: inline-block;">🍳 Recipes</a>
+        <a href="fun-facts.html" style="color: white; text-decoration: none; margin: 0 15px; padding: 10px 20px; background-color: rgba(255,255,255,0.2); border-radius: 20px; transition: all 0.3s ease; display: inline-block;">🤔 Fun Facts</a>
+    </nav>
+    
+    <main>
+        <section>
+            <h2>Why Fruit is Amazing</h2>
+            <p>Fruits are nature's candy! They are not only delicious but also packed with essential vitamins, minerals, and antioxidants. Eating fruit can boost your health, improve your mood, and provide a natural source of energy.</p>
+        </section>
+        <section>
+            <h2>Benefits of Eating Fruit</h2>
+            <ul>
+                <li>Rich in nutrients and fiber</li>
+                <li>Helps maintain a healthy weight</li>
+                <li>Reduces the risk of chronic diseases</li>
+                <li>Hydrates your body</li>
+                <li>Supports a strong immune system</li>
+            </ul>
+        </section>        <section>
+            <h2>Fruit Gallery</h2>
+            <div class="fruit-gallery">
+                <div onclick="showFruitInfo('Apple')" class="fruit-emoji">
+                    <span>🍎</span>
+                    <p>Apple</p>
+                </div>
+                <div onclick="showFruitInfo('Banana')" class="fruit-emoji">
+                    <span>🍌</span>
+                    <p>Banana</p>
+                </div>
+                <div onclick="showFruitInfo('Cherry')" class="fruit-emoji">
+                    <span>🍒</span>
+                    <p>Cherry</p>
+                </div>
+                <div onclick="showFruitInfo('Grapes')" class="fruit-emoji">
+                    <span>🍇</span>
+                    <p>Grapes</p>
+                </div>
+                <div onclick="showFruitInfo('Orange')" class="fruit-emoji">
+                    <span>🍊</span>
+                    <p>Orange</p>
+                </div>
+                <div onclick="showFruitInfo('Strawberry')" class="fruit-emoji">
+                    <span>🍓</span>
+                    <p>Strawberry</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "amazing-world-of-fruit",
+  "version": "1.0.0",
+  "description": "A delightful, interactive website celebrating the wonderful world of fruits with animations and educational content",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/amazing-world-of-fruit.git"
+  },
+  "keywords": [
+    "fruit",
+    "nutrition",
+    "recipes",
+    "interactive",
+    "animations",
+    "education",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/amazing-world-of-fruit/issues"
+  },
+  "homepage": "https://yourusername.github.io/amazing-world-of-fruit"
+}
